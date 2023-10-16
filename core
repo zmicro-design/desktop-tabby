@@ -25,11 +25,12 @@ install() {
     ;;
   esac
 
+  local archx="$arch"
   case $arch in
   arm64) ;;
 
   amd64)
-    arch="x86_64"
+    archx="x86_64"
     ;;
   *)
     log::error "[$(timestamp)] unsupport arch: $arch"
@@ -72,10 +73,10 @@ install() {
     local url=""
     case $arch in
     arm64)
-      url="${DESKTOP_CORE_RELEASE_DOWNLOAD}/${DESKTOP_CORE_VERSION}/${name}-${DESKTOP_CORE_VERSION#v}-${os}-${arch}.dmg"
+      url="${DESKTOP_CORE_RELEASE_DOWNLOAD}/${DESKTOP_CORE_VERSION}/${name}-${DESKTOP_CORE_VERSION#v}-${os}-${archx}.dmg"
       ;;
     amd64)
-      url="${DESKTOP_CORE_RELEASE_DOWNLOAD}/${DESKTOP_CORE_VERSION}/${name}-${DESKTOP_CORE_VERSION#v}-${os}-${arch}.dmg"
+      url="${DESKTOP_CORE_RELEASE_DOWNLOAD}/${DESKTOP_CORE_VERSION}/${name}-${DESKTOP_CORE_VERSION#v}-${os}-${archx}.dmg"
       ;;
     *)
       log::error "[$(timestamp)] unsupport arch: $arch"
@@ -95,11 +96,11 @@ install() {
   log::info "[$(timestamp)][desktop][$name] installing $cache_file ..."
   case $arch in
   arm64)
-    install::dmg $cache_file ${name} "${app_name}" "/Volumes/tabby"
+    install::dmg $cache_file ${name} "${app_name}" "/Volumes/Tabby ${DESKTOP_CORE_VERSION#v}"
     # install::zip $cache_file iTerm2 iTerm.app
     ;;
   amd64)
-    install::dmg $cache_file ${name} "${app_name}" "/Volumes/tabby"
+    install::dmg $cache_file ${name} "${app_name}" "/Volumes/Tabby ${DESKTOP_CORE_VERSION#v}"
     # install::zip $cache_file iTerm2 iTerm.app
     ;;
   *)
